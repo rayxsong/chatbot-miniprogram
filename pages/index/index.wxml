@@ -1,0 +1,34 @@
+<!--index.wxml-->
+
+<view class="container">
+  <!-- message log -->
+  <scroll-view 
+    scroll-y="true" 
+    class="move-up message-area"
+    style="bottom:{{inputBottom}}px;"
+    scroll-into-view="{{toViewId}}"
+    >
+    <block wx:for="{{messages}}" wx:key="index">
+      <!-- user message -->
+      <view wx:if="{{item.sender == 'user'}}" class="message user-message" id="msg-{{index}}">
+        <text>{{item.content}}</text>
+      </view>
+      <!-- bot message -->
+      <view wx:if="{{item.sender == 'bot'}}" class="message bot-message" id="msg-{{index}}">
+        <text>{{item.content}}</text>
+      </view>
+    </block>
+  </scroll-view>
+
+  <!-- input -->
+  <view class="input-area" style="flex-direction:row;">
+    <view>
+      <input focus="{{inputFocus}}" type="text" placeholder="Enter sth ..." bindinput="onInput" value="{{inputContent}}" class="input-field" />
+    </view>
+    <view>
+      <button bindtap="sendMessage">Send</button>
+    </view>
+  </view>
+</view>
+
+
